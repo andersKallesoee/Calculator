@@ -30,6 +30,7 @@ namespace Calc.Test.Unit
         }
 
         // Mikkel har tilføjet her
+        // for at teste om git virker
 
     }
 }
