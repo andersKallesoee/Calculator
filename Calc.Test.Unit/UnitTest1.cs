@@ -29,6 +29,7 @@ namespace Calc.Test.Unit
             Assert.That(_uut.Add(_na, _nb), Is.EqualTo(_na+_nb));
         }
 
+        // Mikkel har tilføjet her
 
     }
 }
