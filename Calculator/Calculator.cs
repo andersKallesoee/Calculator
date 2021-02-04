@@ -23,5 +23,7 @@ namespace Calculator
         {
             return Math.Pow(x, exp);
         }
+
+        // mikkle tilføjet kommentar
     }
 }
