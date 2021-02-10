@@ -81,7 +81,6 @@ namespace Calculator
             }
 
             throw new DivideByZeroException();
-            return 0;
         }
 
         public double Divide(double divisor) // didide overload

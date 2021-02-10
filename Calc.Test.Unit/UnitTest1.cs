@@ -163,7 +163,7 @@ namespace Calc.Test.Unit
         }
 
         [Test] 
-        public void Divide_SumOfTwoPositiveNumbers()
+        public void Divide_SumOfTwoPositiveNumbers_Is1_56()
         {
             Assert.That(_uut.Divide(_pa, _pb), Is.EqualTo(_pa / _pb));
         }
@@ -186,15 +186,7 @@ namespace Calc.Test.Unit
         {
             double test = _uut.Add(_pa, 0);
             Assert.That(_uut.Divide(2), Is.EqualTo(_pa/2));
-        }
-            Assert.That(() => _uut.Divide(_pa, _zero), Throws.TypeOf<DivideByZeroException>());
-        }
-
-
-        [Test]
-        public void Power_TwoPositiveDoubles_resultCorrect()
-        {
-            Assert.That(_uut.Power(_pa, _pb), Is.EqualTo(Math.Pow(_pa, _pb)));
+        
         }
 
         [Test]
@@ -202,6 +194,15 @@ namespace Calc.Test.Unit
         {
             double test = _uut.Add(2, 5);
             Assert.That(() => _uut.Divide(_zero), Throws.TypeOf<DivideByZeroException>());
+        }
+
+        [Test]
+        public void Power_TwoPositiveDoubles_resultCorrect()
+        {
+            Assert.That(_uut.Power(_pa, _pb), Is.EqualTo(Math.Pow(_pa, _pb)));
+        }
+
+
         [Test]
         public void Power_NegativeDoublePositiveInt_ResultCorrect()
         {
