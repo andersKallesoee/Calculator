@@ -125,15 +125,9 @@ namespace Calc.Test.Unit
         [Test]
         public void Divide_WithZero()
         {
-            Assert.That(_uut.Divide(_zero, _pb), Is.EqualTo(_zero / _pb));
-
-            //Når man tester siger den okay, men det er umuligt at dividere med 0
-            //den burde sige fejl
-            //Så jeg tænker at lave noget med at den kaster en exception, 
-            //Jeg kan bare ike lige lure hvordan man laver det i test.
-
-            //Assert.Throws<DivideByZeroException>(() => _uut = new Calc(_pa, _pb));
+            Assert.That(() => _uut.Divide(_pa, _zero), Throws.TypeOf<DivideByZeroException>());
         }
+
 
     }
 }
