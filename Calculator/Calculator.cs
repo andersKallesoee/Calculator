@@ -6,6 +6,11 @@ namespace Calculator
     {
         public double Accumulator { get; private set; }
 
+        public void Clear()
+        {
+            Accumulator = 0;
+        }
+
         public double Add(double a, double b)
         {
             Accumulator = a + b;
