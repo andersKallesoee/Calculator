@@ -7,7 +7,7 @@ namespace Calc.Test.Unit
     public class CalculatorUnitTest
     {
         private Calculator.Calc _uut;
-        private double _pa, _pb, _na, _nb, _zero;
+        private double _pa, _pb, _pc, _na, _nb, _nc, _zero;
 
         [SetUp]
         public void Setup()
@@ -15,8 +15,10 @@ namespace Calc.Test.Unit
             _uut = new Calculator.Calc();
             _pa = 5.43;
             _pb = 3.46;
+            _pc = 5;
             _na = _pa -1;
             _nb = _pb -1;
+            _nc = -3.46;
             _zero = 0;
         }
 
@@ -55,6 +57,24 @@ namespace Calc.Test.Unit
             //Jeg kan bare ike lige lure hvordan man laver det i test.
 
             //Assert.Throws<DivideByZeroException>(() => _uut = new Calc(_pa, _pb));
+        }
+
+        [Test]
+        public void Power_TwoPositiveDoubles_resultCorrect()
+        {
+            Assert.That(_uut.Power(_pa, _pb), Is.EqualTo(Math.Pow(_pa, _pb)));
+        }
+
+        [Test]
+        public void Power_NegativeDoublePositiveInt_resultCorrect()
+        {
+            Assert.That(_uut.Power(_nc,_pc), Is.EqualTo(Math.Pow(_nc, _pc)));
+        }
+
+        [Test]
+        public void Power_NegativeDoublePositiveDouble()
+        {
+            Assert.That(() => _uut.Power(_nc, _pb), Throws.TypeOf<NotFiniteNumberException>());
         }
 
     }

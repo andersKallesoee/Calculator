@@ -47,7 +47,11 @@ namespace Calculator
 
         public double Power(double x, double exp)
         {
-            Accumulator = Math.Pow(x, exp);
+            var tmp = Accumulator = Math.Pow(x, exp);    // checks for overflow and underflow
+            if (double.IsInfinity(tmp) || double.IsNaN(tmp))
+            {
+                throw new NotFiniteNumberException();
+            }
             return Math.Pow(x, exp);
         }
 
