@@ -67,10 +67,12 @@ namespace Calculator
         {
             if (divisor != 0)
             {
+
                 Accumulator = divided / divisor;
                 return divided / divisor;
             }
 
+            throw new DivideByZeroException();
             return 0;
         }
 
@@ -78,12 +80,14 @@ namespace Calculator
         {
             if (divisor != 0)
             {
+
                 double resultat = Accumulator / divisor;
                 Accumulator = resultat;
                 return resultat;
             }
 
-            return 0;
+            throw new DivideByZeroException();
+
         }
 
         

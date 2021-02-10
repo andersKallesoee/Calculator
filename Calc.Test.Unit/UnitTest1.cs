@@ -83,31 +83,40 @@ namespace Calc.Test.Unit
         }
 
         [Test] 
-        public void Divide_SumOfTwoPositiveNumbers()
+        public void Divide_SumOfTwoPositiveNumbers_Is1_56()
         {
             Assert.That(_uut.Divide(_pa, _pb), Is.EqualTo(_pa / _pb));
         }
 
         [Test]
-        public void Divide_SumOfTwoNegativeNumbers()
+        public void Divide_SumOfTwoNegativeNumbers_Is1_56()
         {
             Assert.That(_uut.Divide(_na, _nb), Is.EqualTo(_na / _nb));
         }
 
         [Test]
-        public void Divide_WithZero()
+        public void Divide_WithZero_throwsExecption()
         {
-            Assert.That(_uut.Divide(_zero, _pb), Is.EqualTo(_zero / _pb));
+            Assert.That(() =>_uut.Divide(_pb, _zero), Throws.TypeOf<DivideByZeroException>());
 
-            //Når man tester siger den okay, men det er umuligt at dividere med 0
-            //den burde sige fejl
-            //Så jeg tænker at lave noget med at den kaster en exception, 
-            //Jeg kan bare ike lige lure hvordan man laver det i test.
-
-            //Assert.Throws<DivideByZeroException>(() => _uut = new Calc(_pa, _pb));
         }
 
-        // test af jenkins
+        [Test]
+        public void Divide_OverloadPositiveNumbers_Is2_715()
+        {
+            double test = _uut.Add(_pa, 0);
+            Assert.That(_uut.Divide(2), Is.EqualTo(_pa/2));
+        }
+
+        [Test]
+        public void Divide_OverloadWithZero_throwsExecption()
+        {
+            double test = _uut.Add(2, 5);
+            Assert.That(() => _uut.Divide(_zero), Throws.TypeOf<DivideByZeroException>());
+
+        }
+
+
 
     }
 }
