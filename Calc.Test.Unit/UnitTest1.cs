@@ -18,8 +18,6 @@ namespace Calc.Test.Unit
             _na = -_pa;
             _nb = -_pb;
             _pc = 5;
-            _na = _pa -1;
-            _nb = _pb -1;
             _nc = -3.46;
             _zero = 0;
         }
