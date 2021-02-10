@@ -52,15 +52,23 @@ namespace Calculator
 
         public double Power(double x, double exp)
         {
-            Accumulator = Math.Pow(x, exp);
+            Accumulator = Math.Pow(x, exp);    // checks for overflow and underflow
+            if (double.IsInfinity(Accumulator) || double.IsNaN(Accumulator))
+            {
+                throw new NotFiniteNumberException();
+            }
+
             return Math.Pow(x, exp);
         }
 
         public double Power(double exponent) // power overload
         {
-            double resultat = Math.Pow(Accumulator, exponent);
-            Accumulator = resultat;
-            return resultat;
+            Accumulator = Math.Pow(Accumulator, exponent);
+            if (double.IsInfinity(Accumulator) || double.IsNaN(Accumulator))
+            {
+                throw new NotFiniteNumberException();
+            }
+            return Accumulator;
         }
 
         public double Divide(double divided, double divisor) //divide vil ikke dividere med 0
@@ -86,7 +94,6 @@ namespace Calculator
             return 0;
         }
 
-        
 
     }
 }
