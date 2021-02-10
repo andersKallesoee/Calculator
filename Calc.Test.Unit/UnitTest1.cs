@@ -66,16 +66,30 @@ namespace Calc.Test.Unit
         }
 
         [Test]
-        public void Power_NegativeDoublePositiveInt_resultCorrect()
+        public void Power_NegativeDoublePositiveInt_ResultCorrect()
         {
             Assert.That(_uut.Power(_nc,_pc), Is.EqualTo(Math.Pow(_nc, _pc)));
         }
 
         [Test]
-        public void Power_NegativeDoublePositiveDouble()
+        public void Power_NegativeDoublePositiveDouble_ExceptionThrown()
         {
             Assert.That(() => _uut.Power(_nc, _pb), Throws.TypeOf<NotFiniteNumberException>());
         }
 
+        [Test]
+        public void Power_AccumulatorNegativeDoublePositiveInt_ResultCorrect()
+        {
+            _uut.Power(_pa, _pb);
+            Assert.That(_uut.Power(_pc), Is.EqualTo(Math.Pow(Math.Pow(_pa, _pb), _pc)));
+        }
+
+        [Test]
+        public void Power_AccumulatorNegativeDoublePositiveDouble_ExceptionThrown()
+        {
+            _uut.Power(_pa, _pb);
+            _uut.Multiply(-1);
+            Assert.That(() => _uut.Power(_pb), Throws.TypeOf<NotFiniteNumberException>());
+        }
     }
 }
