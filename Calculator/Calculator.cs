@@ -73,13 +73,11 @@ namespace Calculator
 
         public double Divide(double divided, double divisor) //divide vil ikke dividere med 0
         {
-            if (divisor != 0)
-            {
-                Accumulator = divided / divisor;
-                return divided / divisor;
-            }
+            if (divisor == 0) throw new DivideByZeroException();
 
-            return 0;
+            Accumulator = divided / divisor;
+            return divided / divisor;
+
         }
 
         public double Divide(double divisor) // didide overload
@@ -91,7 +89,7 @@ namespace Calculator
                 return resultat;
             }
 
-            return 0;
+            throw new DivideByZeroException();
         }
 
 
