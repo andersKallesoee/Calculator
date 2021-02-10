@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using NUnit.Framework;
 using Calc = Calculator.Calc;
 
@@ -7,7 +7,7 @@ namespace Calc.Test.Unit
     public class CalculatorUnitTest
     {
         private Calculator.Calc _uut;
-        private double _pa, _pb, _na, _nb, _zero;
+        private double _pa, _pb, _pc, _na, _nb, _nc, _zero;
 
         [SetUp]
         public void Setup()
@@ -17,6 +17,8 @@ namespace Calc.Test.Unit
             _pb = 3.46;
             _na = -_pa;
             _nb = -_pb;
+            _pc = 5;
+            _nc = -3.46;
             _zero = 0;
         }
 
@@ -167,19 +169,64 @@ namespace Calc.Test.Unit
         }
 
         [Test]
-        public void Divide_SumOfTwoNegativeNumbers()
+        public void Divide_SumOfTwoNegativeNumbers_Is1_56()
         {
             Assert.That(_uut.Divide(_na, _nb), Is.EqualTo(_na / _nb));
         }
 
         [Test]
-        public void Divide_WithZero()
+        public void Divide_WithZero_throwsExecption()
         {
+            Assert.That(() =>_uut.Divide(_pb, _zero), Throws.TypeOf<DivideByZeroException>());
+
+        }
+
+        [Test]
+        public void Divide_OverloadPositiveNumbers_Is2_715()
+        {
+            double test = _uut.Add(_pa, 0);
+            Assert.That(_uut.Divide(2), Is.EqualTo(_pa/2));
+        }
             Assert.That(() => _uut.Divide(_pa, _zero), Throws.TypeOf<DivideByZeroException>());
         }
 
 
-        // test af jenkins
+        [Test]
+        public void Power_TwoPositiveDoubles_resultCorrect()
+        {
+            Assert.That(_uut.Power(_pa, _pb), Is.EqualTo(Math.Pow(_pa, _pb)));
+        }
 
+        [Test]
+        public void Divide_OverloadWithZero_throwsExecption()
+        {
+            double test = _uut.Add(2, 5);
+            Assert.That(() => _uut.Divide(_zero), Throws.TypeOf<DivideByZeroException>());
+        [Test]
+        public void Power_NegativeDoublePositiveInt_ResultCorrect()
+        {
+            Assert.That(_uut.Power(_nc,_pc), Is.EqualTo(Math.Pow(_nc, _pc)));
+        }
+
+        [Test]
+        public void Power_NegativeDoublePositiveDouble_ExceptionThrown()
+        {
+            Assert.That(() => _uut.Power(_nc, _pb), Throws.TypeOf<NotFiniteNumberException>());
+        }
+
+        [Test]
+        public void Power_AccumulatorNegativeDoublePositiveInt_ResultCorrect()
+        {
+            _uut.Power(_pa, _pb);
+            Assert.That(_uut.Power(_pc), Is.EqualTo(Math.Pow(Math.Pow(_pa, _pb), _pc)));
+        }
+
+        [Test]
+        public void Power_AccumulatorNegativeDoublePositiveDouble_ExceptionThrown()
+        {
+            _uut.Power(_pa, _pb);
+            _uut.Multiply(-1);
+            Assert.That(() => _uut.Power(_pb), Throws.TypeOf<NotFiniteNumberException>());
+        }
     }
 }
