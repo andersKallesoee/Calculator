@@ -66,7 +66,7 @@ namespace Calculator
                 return divided / divisor;
             }
 
-            return 0;
+            throw new DivideByZeroException();
         }
 
         public double Divide(double divisor) // didide overload
