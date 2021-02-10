@@ -74,14 +74,12 @@ namespace Calculator
 
         public double Divide(double divisor) // didide overload
         {
-            if (divisor != 0)
-            {
-                double resultat = Accumulator / divisor;
-                Accumulator = resultat;
-                return resultat;
-            }
+            if (divisor == 0) throw new DivideByZeroException();
 
-            throw new DivideByZeroException();
+            double resultat = Accumulator / divisor;
+            Accumulator = resultat;
+            return resultat;
+
         }
 
         
