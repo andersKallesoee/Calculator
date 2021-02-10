@@ -82,6 +82,84 @@ namespace Calc.Test.Unit
             Assert.That(_uut.Add(_na), Is.EqualTo(0));
         }
 
+        [Test]
+        public void Subtract_SumOfTwoPositiveDoubles_Is1_97()
+        {
+            Assert.That(_uut.Subtract(_pa, _pb), Is.EqualTo(_pa-_pb));
+        }
+
+        [Test]
+        public void Subtract_SumOfTwoNegativeDoubles_IsNegative1_97()
+        {
+            Assert.That(_uut.Subtract(_na, _nb), Is.EqualTo(_na-_nb));
+        }
+
+        [Test]
+        public void Subtract_SumOfNegativeAndPositive_IsNegative8_89()
+        {
+            Assert.That(_uut.Subtract(_na, _pb), Is.EqualTo(_na-_pb));
+        }
+
+        [Test]
+        public void Subtract_OverloadOfTwoPositiveDoubles_Is1_97()
+        {
+            _uut.Subtract(_pa, 0);
+            Assert.That(_uut.Subtract( _pb), Is.EqualTo(_pa-_pb));
+        }
+
+        [Test]
+        public void Subtract_OverloadOfTwoNegativeDoubles_IsNegative1_97()
+        {
+            _uut.Subtract(_na, 0);
+            Assert.That(_uut.Subtract(_nb), Is.EqualTo(_na-_nb));
+        }
+
+        [Test]
+        public void Subtract_OverloadOfNegativeAndPositive_IsNegative8_89()
+        {
+            _uut.Subtract(_na, 0);
+            Assert.That(_uut.Subtract(_pb), Is.EqualTo(_na-_pb));
+        }
+
+        [Test]
+        public void Multiply_SumOfTwoPositiveDoubles_Is18_78()
+        {
+            Assert.That(_uut.Multiply(_pa, _pb), Is.EqualTo(_pa*_pb));
+        }
+
+        [Test]
+        public void Multiply_SumOfTwoNegativeDoubles_Is18_78()
+        {
+            Assert.That(_uut.Multiply(_na, _nb), Is.EqualTo(_na * _nb));
+        }
+
+        [Test]
+        public void Multiply_SumOfNegativeAndPositive_IsNegative18_78()
+        {
+            Assert.That(_uut.Multiply(_na, _pb), Is.EqualTo(_na * _pb));
+        }
+
+        [Test]
+        public void Multiply_OverloadOfTwoPositiveDoubles_Is102()
+        {
+            _uut.Multiply(_pa, _pa);
+            Assert.That(_uut.Multiply(_pb), Is.EqualTo((_pa*_pa)*_pb));
+        }
+
+        [Test]
+        public void Multiply_OverloadOfTwoNegativeDoubles_Is102()
+        {
+            _uut.Multiply(_na, _pa);
+            Assert.That(_uut.Multiply(_nb), Is.EqualTo((_na * _pa) * _nb));
+        }
+
+        [Test]
+        public void Multiply_OverloadOfNegativeAndPositive_IsNegative102()
+        {
+            _uut.Multiply(_pa, _na);
+            Assert.That(_uut.Multiply(_pb), Is.EqualTo((_pa * _na) * _pb));
+        }
+
         [Test] 
         public void Divide_SumOfTwoPositiveNumbers()
         {
@@ -97,15 +175,9 @@ namespace Calc.Test.Unit
         [Test]
         public void Divide_WithZero()
         {
-            Assert.That(_uut.Divide(_zero, _pb), Is.EqualTo(_zero / _pb));
-
-            //Når man tester siger den okay, men det er umuligt at dividere med 0
-            //den burde sige fejl
-            //Så jeg tænker at lave noget med at den kaster en exception, 
-            //Jeg kan bare ike lige lure hvordan man laver det i test.
-
-            //Assert.Throws<DivideByZeroException>(() => _uut = new Calc(_pa, _pb));
+            Assert.That(() => _uut.Divide(_pa, _zero), Throws.TypeOf<DivideByZeroException>());
         }
+
 
         // test af jenkins
 
