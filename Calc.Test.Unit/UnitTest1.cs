@@ -57,5 +57,7 @@ namespace Calc.Test.Unit
             //Assert.Throws<DivideByZeroException>(() => _uut = new Calc(_pa, _pb));
         }
 
+        // test af jenkins
+
     }
 }
